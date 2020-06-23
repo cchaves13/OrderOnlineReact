@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
+import {getBaseApiUrl} from '../../common/Urls';
+import './Products.scss';   
+import AddProduct from './AddProduct/AddProduct';
 class Products extends Component {
 
    
@@ -8,52 +10,79 @@ class Products extends Component {
         super(props)
         
         this.state = {
-                 products: []
+                 products: [],
+                 showModal:false,
+                 productToEdit:{Name:"",Price:""}
         }
     }
 
     
 
     componentDidMount(){
-      axios.get("http://localhost:65437/api/product").then(res=> {
-        console.log(res);
-      });
+        this.getProducts();
+    }
+
+    getProducts = ()=>{
+        axios.get(getBaseApiUrl() + "/product").then(response=> {
+            this.setState({products:response.data});
+        });
+    }
+
+    toggleModal= ()=>{
+        this.setState({showModal:!this.state.showModal});
+    }
+
+    handleEdit = (e, product)=>{
+        this.toggleModal();
+        this.setState({productToEdit: product});       
+    }
+
+    deleteProduct = (e, product)=>{
+        console.log(product);
+        axios.post(getBaseApiUrl() + "/product/delete/" + product.Id).then(response=>{
+            console.log(response);
+            this.getProducts();
+        });
     }
 
     render() {
         return (
-            <div>
+            <div id="ProductsPage">
                 <h1>Productos</h1>
-                <table className="table table-dark">
+                <div className="manage-bar">
+                    <input className="beauty-input" placeholder="Buscar Producto"></input>
+                    <a className="beauty-btn green" onClick={this.toggleModal}>Agregar Producto</a>
+                </div>
+                <table className="beauty-table" cellspacing="0">
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>          
+                            <th>Accion</th>              
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
+                        {this.state.products.map((product=>
+                            <tr key={product.Id}>
+                                <td>{product.Name}</td>
+                                <td>{product.Price}</td>
+                                <td>
+                                    <a className="beauty-btn green" onClick={(e)=> {this.handleEdit(e, product)}}>Editar</a>
+                                    <a className="beauty-btn red" onClick={(e)=> {this.deleteProduct(e, product)}}>Eliminar</a>
+                                </td>
+                            </tr>
+                         ))}
                     </tbody>
                 </table>
+                {
+                    this.state.showModal ? 
+                    <AddProduct 
+                        refreshProducts={this.getProducts} 
+                        modalControl={this.toggleModal}
+                        productToEdit={this.state.productToEdit}>
+                    </AddProduct> 
+                        : ""
+                }                
             </div>
         )
     }

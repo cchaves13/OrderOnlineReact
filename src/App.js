@@ -14,10 +14,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          
+        <header className="App-header">          
         </header>
-        <h1>Hello World</h1>
       </div>
       <Switch>
         <Route path="/products">

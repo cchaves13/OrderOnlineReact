@@ -1,0 +1,59 @@
+/* Regular Clases */
+
+/** Form Clases **/
+
+.beauty-input{
+    border-radius: 8px;
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da; 
+}
+
+.beauty-input:focus{
+    border-color: #80bdff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.beauty-btn{
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;   
+    transition: all 0.1s;
+    cursor: pointer;
+    &.green{
+        background: #28a745;
+        color: #fff;
+    }
+    &.red{
+        background: #B6240B;
+        color: #fff;
+    }
+    &:hover{
+        border-color: #80bdff !important;
+        outline: none !important;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+}
+
+.beauty-table{
+   
+    width: 100%;
+    table-layout: fixed;
+    overflow-wrap: break-word;
+    td{
+        border-bottom: 1px #000 solid;
+        padding: 15px;
+    }
+    th{
+        text-align: left;
+        padding: 15px;
+        background-color: #000;
+        color: #fff;
+    }
+    tr:nth-child(even){
+        background-color: #000;
+        color:#fff;
+    }
+}

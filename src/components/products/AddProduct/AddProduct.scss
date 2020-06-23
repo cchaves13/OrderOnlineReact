@@ -1,0 +1,21 @@
+.modal{
+    width: 700px;
+    position: absolute;
+    top: 30%;
+    padding: 0px;
+    left: 25%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+    .close-icon{
+        float: right;
+        cursor: pointer;
+    }
+    input{
+        margin-bottom: 10px;
+        width: 680px;
+    }
+    a{
+        float: right;
+    }
+}
