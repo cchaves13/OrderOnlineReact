@@ -1,0 +1,23 @@
+#navigationContainer{
+    background-color: #ffff;
+    color: #000;
+    nav{
+        display: block;
+        ul{
+            padding: 10px 0px 10px 0px;
+          li{
+              padding: 5px;
+              margin: 0px 20px 0px 20px;
+              list-style: none;
+              display: inline-block;
+              @media only screen and (max-width: 600px) {
+                margin: 0px 5px 0px 10px;
+              }
+              a{
+                  text-decoration: none;
+                  color: #000;
+              }
+          }  
+        }
+    }
+}

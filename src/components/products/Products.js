@@ -37,12 +37,24 @@ class Products extends Component {
         this.setState({productToEdit: product});       
     }
 
-    deleteProduct = (e, product)=>{
-        console.log(product);
-        axios.post(getBaseApiUrl() + "/product/delete/" + product.Id).then(response=>{
-            console.log(response);
+    deleteProduct = (e, product)=>{     
+        axios.post(getBaseApiUrl() + "/product/delete/" + product.Id).then(response=>{        
             this.getProducts();
         });
+    }
+
+    renderProducts =  ()=>{
+        return this.state.products.map((product=>
+            <tr key={product.Id}>
+                <td>{product.Name}</td>
+                <td>{product.Price}</td>
+                <td>Kg</td>
+                <td>
+                    <a className="beauty-btn green" onClick={(e)=> {this.handleEdit(e, product)}}>Editar</a>
+                    <a className="beauty-btn red" onClick={(e)=> {this.deleteProduct(e, product)}}>Eliminar</a>
+                </td>
+            </tr>
+        ))
     }
 
     render() {
@@ -57,21 +69,13 @@ class Products extends Component {
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Precio</th>          
+                            <th>Precio</th>
+                            <th>UND</th>           
                             <th>Accion</th>              
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.products.map((product=>
-                            <tr key={product.Id}>
-                                <td>{product.Name}</td>
-                                <td>{product.Price}</td>
-                                <td>
-                                    <a className="beauty-btn green" onClick={(e)=> {this.handleEdit(e, product)}}>Editar</a>
-                                    <a className="beauty-btn red" onClick={(e)=> {this.deleteProduct(e, product)}}>Eliminar</a>
-                                </td>
-                            </tr>
-                         ))}
+                        {this.renderProducts()}
                     </tbody>
                 </table>
                 {

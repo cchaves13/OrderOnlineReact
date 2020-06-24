@@ -49,11 +49,28 @@
     th{
         text-align: left;
         padding: 15px;
-        background-color: #000;
-        color: #fff;
+        background-color: #DBD9D8;
+        color: #000;
     }
     tr:nth-child(even){
-        background-color: #000;
-        color:#fff;
+        background-color: #DBD9D8;
+        color:#000;
     }
 }
+
+
+
+/** Website **/
+
+body{
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}   
+
+body, ul, nav, div, header {
+    margin: 0;
+    padding: 0; 
+}
+
+

@@ -9,20 +9,26 @@ import {
 } from "react-router-dom";
 import Products from './components/products/Products';
 import Clients from './components/clients/Clients';
+import Navigation from './components/website/navigation/Navigation';
+import Home from './components/website/home/Home';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header className="App-header">          
+        <Navigation></Navigation>
         </header>
       </div>
-      <Switch>
+      <Switch>        
         <Route path="/products">
           <Products></Products>
         </Route>
         <Route path="/clientes">
           <Clients></Clients>
+        </Route>
+        <Route path="*">
+          <Home></Home>
         </Route>
       </Switch>
     </Router>
