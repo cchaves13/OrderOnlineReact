@@ -19,8 +19,8 @@ class Navigation extends Component {
             {label: "Tienda", link:"/Tienda"},
         ]
 
-        return navigation.map((element)=>(
-            <li>
+        return navigation.map((element, index)=>(
+            <li key={index}>
                 <a href={element.link}>{element.label}</a>
             </li>
         ))

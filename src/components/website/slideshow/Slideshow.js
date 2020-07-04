@@ -34,15 +34,12 @@ class Slideshow extends Component {
         ]
 
         return slides.map((slide, index)=>(
-        <div key={index} className="swiper-slide" style={
+        <div key={index} className="swiper-slide img-slide" style={
             {
-                backgroundImage: "url(" + slide.backgroundImage + ")",
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'none',               
+                backgroundImage: "url(" + slide.backgroundImage + ")"                            
             }
         }>
-           <h1>{slide.heading}</h1>
+           <h1 className="slideshow-headline">{slide.heading}</h1>
 
         </div>
         ))
