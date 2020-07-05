@@ -83,7 +83,7 @@ class ProductDetail extends Component {
             <div className="product-detail">
               
         <h3>{this.state.Product.Name} -  {this.state.Product.Unity}</h3>
-                <div className="img-container" style={ {backgroundImage: 'url("/img/pics/products/' + this.state.Product.Name + '.jpg")'}}>
+                <div className="img-container" style={ {backgroundImage: 'url("/img/pics/products/' + this.state.Product.Name.toLowerCase() + '.jpg")'}}>
 
                 </div>
                 {/* <img src={"/img/pics/products/" + Product.Name + ".jpg"}></img> */}
