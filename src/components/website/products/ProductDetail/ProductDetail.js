@@ -83,7 +83,7 @@ class ProductDetail extends Component {
             <div className="product-detail">
               
         <h3>{this.state.Product.Name} -  {this.state.Product.Unity}</h3>
-                <div className="img-container" style={ {backgroundImage: 'url("/img/pics/products/' + this.state.Product.Name.toLowerCase() + '.jpg")'}}>
+                <div className="img-container" style={ {backgroundImage: 'url("/img/pics/products/' + this.state.Product.Name + '.jpg")'}}>
 
                 </div>
                 {/* <img src={"/img/pics/products/" + Product.Name + ".jpg"}></img> */}
@@ -92,8 +92,8 @@ class ProductDetail extends Component {
                     <label>Cant: </label>
                     <input className="quantiy" value={this.state.Product.Quantity} disabled></input>
                     <div className="math-container">                      
-                        <span className="math-icon minus" onClick={()=>{this.props.handleQuantity(this.state.Product)} }></span>
-                        <span className="math-icon plus" onClick={()=>{this.props.handleQuantity(this.state.Product)} }></span>
+                        <span className="math-icon minus" onClick={()=>this.props.handleQuantity(this.state.Product, "minus")}></span>
+                        <span className="math-icon plus" onClick={()=>this.props.handleQuantity(this.state.Product, "plus")}></span>
                     </div>
                 </div>
                 {this.state.isProductInCart ? 
