@@ -10,7 +10,8 @@ class AddProduct extends Component {
                  product:{
                      Id:0,
                      Name:"",
-                     Price: ""
+                     Price: "",
+                     Unity: ""
                  }
         }
     }
@@ -30,18 +31,33 @@ class AddProduct extends Component {
                 <h3>Producto</h3>                
                 <input className="beauty-input" placeholder="Nombre" value={this.state.product.Name} name="Name" onChange={this.handleChange}></input>
                 <input className="beauty-input" placeholder="Precio" value={this.state.product.Price} name="Price" onChange={this.handleChange}></input>
+                <label>Kilo</label>
+                <input type="radio" name="Kilo" 
+                checked={this.state.product.Unity == "Kilo" ? true : false}
+                onChange={this.handleChangeRadio}></input>
+                <label>Unidad</label>
+                <input type="radio" name="Unidad" 
+                checked={this.state.product.Unity == "Unidad" ? true : false}
+                onChange={this.handleChangeRadio}></input>
                 <a className="beauty-btn green" onClick={this.addProduct}>Guardar</a>
             </div>
         )
     }
 
     handleChange = (event)=>{       
-        this.setState({...this.state.jasper, [event.target.name] : event.target.value});
         this.setState({
             product:{
                 ...this.state.product,
                 [event.target.name] : event.target.value
-        }})
+        }});
+    }
+
+    handleChangeRadio = (event)=>{
+        this.setState({
+            product:{
+                ...this.state.product,
+                Unity : event.target.name
+        }});
     }
 
     addProduct = ()=>{

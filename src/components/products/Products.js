@@ -12,7 +12,7 @@ class Products extends Component {
         this.state = {
                  products: [],
                  showModal:false,
-                 productToEdit:{Name:"",Price:""}
+                 productToEdit:{Name:"",Price:"", Unity:"", Id:0}
         }
     }
 
@@ -29,7 +29,9 @@ class Products extends Component {
     }
 
     toggleModal= ()=>{
-        this.setState({showModal:!this.state.showModal});
+        this.setState({
+            showModal:!this.state.showModal, 
+            productToEdit:{Name:"", Price:"", Id:0, Unity:""}});
     }
 
     handleEdit = (e, product)=>{
@@ -48,7 +50,7 @@ class Products extends Component {
             <tr key={product.Id}>
                 <td>{product.Name}</td>
                 <td>{product.Price}</td>
-                <td>Kg</td>
+                <td>{product.Unity}</td>
                 <td>
                     <a className="beauty-btn green" onClick={(e)=> {this.handleEdit(e, product)}}>Editar</a>
                     <a className="beauty-btn red" onClick={(e)=> {this.deleteProduct(e, product)}}>Eliminar</a>

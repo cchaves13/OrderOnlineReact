@@ -11,8 +11,10 @@ class Sidebar extends Component {
 
     componentDidMount(){
         var cart = JSON.parse(localStorage.getItem('cart'));
-        console.log(cart);
+       if(cart){
         this.setState({products:cart.products});
+       }       
+        
     }
     plus = (e, product)=>{
         let newProductList = this.state.products;
@@ -55,7 +57,7 @@ class Sidebar extends Component {
         return (
             <div id="sideBar">
                <div className="sidebar-header">
-                <h2>Mi Carrito</h2>
+                <h2>{this.state.products.length > 0 ? "Mi Carrito" : "Aún no tienes productos en el carrito"}</h2>
                 <span id="closeCart" onClick={(e)=>{e.stopPropagation(); this.props.toggleSidebar()}}></span>
                </div>
                <ul className="cart-product-list">

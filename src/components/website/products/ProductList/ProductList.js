@@ -78,7 +78,9 @@ class ProductList extends Component {
         if(!cart){
             let newCart = JSON.stringify({products:[product]});
             localStorage.setItem('cart', newCart);
-            this.setState({isProductInCart:true});            
+            let stateProducts = this.state.products;
+            stateProducts[stateProducts.findIndex(x=> x.Id == product.Id)].isProductInCart = true;
+            this.setState({products:stateProducts});
         }else{
             if(!cart.products.find(x=> x.Id == product.Id)){
                 let newCart = JSON.stringify({products:[...cart.products,product]});
@@ -104,6 +106,7 @@ class ProductList extends Component {
     editProduct = ()=>{
         let changeProduct = [...this.state.products];
         let productsInCart = JSON.parse(localStorage.getItem('cart'))?.products;  
+       if(productsInCart){
         changeProduct.map((product,index)=>{
             let productIndex = productsInCart.findIndex(x=> x.Id == product.Id);
             if(productIndex >=0){
@@ -113,6 +116,7 @@ class ProductList extends Component {
                 product.isProductInCart = false;
             }
         });    
+       }
        
         this.setState({products:changeProduct});
             
