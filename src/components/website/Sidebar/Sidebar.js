@@ -42,6 +42,15 @@ class Sidebar extends Component {
         localStorage.setItem('cart', JSON.stringify({products:newProductList}));
     }
 
+    removeFromCart =(productId)=>{
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        if(cart){
+            let updateCart = cart.products.filter(x=> x.Id != productId);
+            this.setState({products:updateCart});
+            localStorage.setItem('cart', JSON.stringify({products:updateCart}));
+        }        
+    }
+
     render() {
         return (
             <div id="sideBar">
@@ -61,7 +70,7 @@ class Sidebar extends Component {
                             <span className="cart-quantity">{product.Quantity}</span>   
                             <span className="cart-minus"  onClick={(e)=> {this.minus(e, product)}}></span>  
                           </div>       
-                          <div className="cart-remove">
+                          <div className="cart-remove" onClick={()=>{this.removeFromCart(product.Id)}}>
                           </div>           
                           <span>Subtotal: ₡{(product.Price * product.Quantity)}</span> 
                       </li>

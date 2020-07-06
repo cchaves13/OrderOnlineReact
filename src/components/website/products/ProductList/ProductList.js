@@ -17,12 +17,16 @@ class ProductList extends Component {
     }
 
     componentDidMount(){
-        axios.get(getBaseApiUrl() + "/product").then((response)=>{
-            response.data.map((pro)=>{pro.Quantity = 1});
-            this.setState({products:response.data});     
+        axios.get(getBaseApiUrl() + "/product").then((response)=>{            
+            this.setState({products:  this.initValues(response.data)});     
             this.editProduct();      
+            console.log(this.state.products);
         });      
         document.addEventListener('customEvent', this.editProduct);
+    }
+    initValues = (values)=>{
+        values.map((pro)=>{pro.Quantity = 1; pro.isProductInCart = false});
+        return values;
     }
 
     componentDidUpdate(){
@@ -68,14 +72,50 @@ class ProductList extends Component {
         
     }
 
+    addToCart = (product)=>{
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        let jsonProduct = JSON.stringify(product);
+        if(!cart){
+            let newCart = JSON.stringify({products:[product]});
+            localStorage.setItem('cart', newCart);
+            this.setState({isProductInCart:true});            
+        }else{
+            if(!cart.products.find(x=> x.Id == product.Id)){
+                let newCart = JSON.stringify({products:[...cart.products,product]});
+                localStorage.setItem('cart', newCart);
+                let stateProducts = this.state.products;
+                stateProducts[stateProducts.findIndex(x=> x.Id == product.Id)].isProductInCart = true;
+                this.setState({products:stateProducts});
+            }            
+        }    
+    }
+
+
+    removeToCart = (product)=>{
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        cart.products = cart.products.filter(x=> x.Id != product.Id);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        let stateProducts = this.state.products;
+        stateProducts[stateProducts.findIndex(x=> x.Id == product.Id)].isProductInCart = false;
+        this.setState({isProductInCart:false});
+    }
+
     //this metod is when cart is updated from sidebar.js
     editProduct = ()=>{
         let changeProduct = [...this.state.products];
         let productsInCart = JSON.parse(localStorage.getItem('cart'))?.products;  
-            productsInCart.map((product, index)=>{
-                changeProduct[changeProduct.findIndex(x=> x.Id == product.Id)].Quantity = product.Quantity;
-            });      
+        changeProduct.map((product,index)=>{
+            let productIndex = productsInCart.findIndex(x=> x.Id == product.Id);
+            if(productIndex >=0){
+                product.Quantity = productsInCart[productIndex].Quantity;
+                product.isProductInCart = true;
+            }else{
+                product.isProductInCart = false;
+            }
+        });    
+       
         this.setState({products:changeProduct});
+            
     }
 
     render() {
@@ -83,7 +123,11 @@ class ProductList extends Component {
            <div id="productList" className="">
                {this.state.products.map((product, index)=> {
                    let productToShow = product;
-               return <ProductDetail Product={product} handleQuantity={this.handleQuantity} key={index}></ProductDetail>
+               return <ProductDetail Product={product}
+                handleQuantity={this.handleQuantity} 
+                addToCart={this.addToCart} 
+                removeToCart = {this.removeToCart}
+                key={index}></ProductDetail>
             })}
            </div>
         )
