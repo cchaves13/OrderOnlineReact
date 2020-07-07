@@ -32,13 +32,22 @@ class AddProduct extends Component {
                 <input className="beauty-input" placeholder="Nombre" value={this.state.product.Name} name="Name" onChange={this.handleChange}></input>
                 <input className="beauty-input" placeholder="Precio" value={this.state.product.Price} name="Price" onChange={this.handleChange}></input>
                 <label>Kilo</label>
-                <input type="radio" name="Kilo" 
+                <input className="radio-button"  type="radio" name="Kilo" 
                 checked={this.state.product.Unity == "Kilo" ? true : false}
                 onChange={this.handleChangeRadio}></input>
                 <label>Unidad</label>
-                <input type="radio" name="Unidad" 
+                <input className="radio-button"  type="radio" name="Unidad" 
                 checked={this.state.product.Unity == "Unidad" ? true : false}
                 onChange={this.handleChangeRadio}></input>
+                <br></br>
+                 <label>Activo</label>
+                <input className="radio-button"  type="radio" name="Activo" 
+                checked={this.state.product.IsActive}
+                onChange={this.handeChangeActive}></input>
+                 <label>Desactivado</label>
+                <input className="radio-button" type="radio" name="Desactivado" 
+                checked={!this.state.product.IsActive}
+                onChange={this.handeChangeActive}></input>
                 <a className="beauty-btn green" onClick={this.addProduct}>Guardar</a>
             </div>
         )
@@ -52,6 +61,14 @@ class AddProduct extends Component {
         }});
     }
 
+    handeChangeActive = (event)=>{
+        this.setState({
+            product:{
+                ...this.state.product,
+                IsActive : event.target.name == "Activo" ? true : false
+        }});
+    }
+
     handleChangeRadio = (event)=>{
         this.setState({
             product:{
@@ -62,7 +79,7 @@ class AddProduct extends Component {
 
     addProduct = ()=>{
         Axios.post(getBaseApiUrl() + "/product", this.state.product).then(response=>{
-            console.log(response);
+            this.props.modalControl();
             this.props.refreshProducts();
         });
     }

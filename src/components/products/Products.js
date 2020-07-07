@@ -12,7 +12,7 @@ class Products extends Component {
         this.state = {
                  products: [],
                  showModal:false,
-                 productToEdit:{Name:"",Price:"", Unity:"", Id:0}
+                 productToEdit:{Name:"",Price:"", Unity:"", Id:0, IsActive:true}
         }
     }
 
@@ -25,6 +25,7 @@ class Products extends Component {
     getProducts = ()=>{
         axios.get(getBaseApiUrl() + "/product").then(response=> {
             this.setState({products:response.data});
+            console.log(response.data);
         });
     }
 
@@ -51,6 +52,7 @@ class Products extends Component {
                 <td>{product.Name}</td>
                 <td>{product.Price}</td>
                 <td>{product.Unity}</td>
+                <td>{product.IsActive ? "Activo" : "Desactivado"}</td>
                 <td>
                     <a className="beauty-btn green" onClick={(e)=> {this.handleEdit(e, product)}}>Editar</a>
                     <a className="beauty-btn red" onClick={(e)=> {this.deleteProduct(e, product)}}>Eliminar</a>
@@ -72,7 +74,8 @@ class Products extends Component {
                         <tr>
                             <th>Nombre</th>
                             <th>Precio</th>
-                            <th>UND</th>           
+                            <th>UND</th> 
+                            <th>Estado</th>          
                             <th>Accion</th>              
                         </tr>
                     </thead>

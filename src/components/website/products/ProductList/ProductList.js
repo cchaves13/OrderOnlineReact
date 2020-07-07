@@ -17,7 +17,7 @@ class ProductList extends Component {
     }
 
     componentDidMount(){
-        axios.get(getBaseApiUrl() + "/product").then((response)=>{            
+        axios.get(getBaseApiUrl() + "/product/GetForEcom").then((response)=>{            
             this.setState({products:  this.initValues(response.data)});     
             this.editProduct();      
             console.log(this.state.products);
