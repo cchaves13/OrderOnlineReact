@@ -1,6 +1,11 @@
 #navigationContainer{
     background-color: #ffff;
     color: #000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+    
     nav{
         display: block;
         ul{

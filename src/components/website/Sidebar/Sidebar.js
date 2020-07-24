@@ -78,6 +78,7 @@ class Sidebar extends Component {
                       </li>
                     ))}       
                </ul>
+               <a id="confirmBtn" className="beauty-btn green" href="/confirmacion">Confirmar Pedido</a>
             </div>
         )
     }

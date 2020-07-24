@@ -21,7 +21,7 @@ class Slideshow extends Component {
                 link:"#"
             },
             {
-                heading: "Compra Desde Tu Hogar",
+                heading: "Compra y Recibe Tus Productos Desde Tu Hogar",
                 backgroundImage: "/img/slideshow/pic1.jpg",
                 link:"#"
             },

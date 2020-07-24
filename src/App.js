@@ -14,6 +14,7 @@ import Home from './components/website/home/Home';
 import Shop from './components/website/Shop/Shop';
 import CartButton from './components/website/CartButton/CartButton';
 import Sidebar from './components/website/Sidebar/Sidebar';
+import ConfirmationScreen from './components/website/ConfirmationScreen/ConfirmationScreen';
 
 
 
@@ -69,6 +70,9 @@ class App extends Component {
         </Route>
         <Route path="/tienda">
         <Shop></Shop>
+        </Route>
+        <Route path="/confirmacion">
+        <ConfirmationScreen></ConfirmationScreen>
         </Route>
         <Route path="*">
           <Home></Home>
