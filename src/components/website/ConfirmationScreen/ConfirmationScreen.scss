@@ -1,0 +1,32 @@
+.map-active{
+    display: block;
+}
+
+.map-hidden{
+    display: none;
+}
+.info-user{
+    width: 80%;
+    display: block;
+    margin: auto;
+    .form-control{
+        margin: 10px;
+        width: 100%;
+        label{
+            width: 80px;
+            display: inline-block;
+            
+        }
+
+        input{
+            width: 200px;
+        }
+    }
+}
+
+#googleMap{
+    display: block;
+    margin: auto;
+    width: 300px;
+    height: 300;
+}

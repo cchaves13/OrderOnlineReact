@@ -57,21 +57,31 @@ function myMap() {
     var defaultPosition = new google.maps.LatLng(initialPosition.lat, initialPosition.lng);
     var mapProp= {
     center:defaultPosition,
-    zoom:18,
+    zoom:17,
     mapTypeId: 'roadmap'
     };
+   setTimeout(function(){
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    var marker = new google.maps.Marker({
-        map: map,
-        draggable:true,
-        animation: google.maps.Animation.DROP,
-        position:defaultPosition
-    });
+    var markerArray = [];
 
-    google.maps.event.addListener(marker, 'dragend', function(){
-        map.setCenter(marker.getPosition());
-        console.log({lat: marker.getPosition().lat(), long: marker.getPosition().lng()});
+    // google.maps.event.addListener(marker, 'dragend', function(){
+    //     // map.setCenter(marker.getPosition());
+    //     // console.log({lat: marker.getPosition().lat(), long: marker.getPosition().lng()});
+    // });
+    google.maps.event.addListener(map, 'click', function(e){
+      console.log(e);
+      markerArray.map((mark)=>{mark.setMap(null)});
+      var marker = new google.maps.Marker({
+          map: map,
+          draggable:true,
+          animation: google.maps.Animation.DROP,
+          position: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+      });
+      markerArray.push(marker);
     });
+   },500);
+
+ 
 }
 </script>
 
