@@ -10,10 +10,14 @@ export default class ConfirmationScreen extends Component {
     }
 
     render() {
+        var mapSytle = {
+            width:"500px",
+            height: "500px",
+        }
         return (
             <div>
                 <h1>Confirmacion de Pedido</h1>
-                <div id="map"></div>                
+                <div id="googleMap" style={mapSytle}></div>               
             </div>
         )
     }
