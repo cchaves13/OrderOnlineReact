@@ -58,7 +58,10 @@ function myMap() {
     var mapProp= {
     center:defaultPosition,
     zoom:17,
-    mapTypeId: 'roadmap'
+    mapTypeId: 'roadmap',
+    mapTypeControl:false,
+    streetViewControl:false,
+    panControl:false
     };
    setTimeout(function(){
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);

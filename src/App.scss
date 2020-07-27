@@ -75,18 +75,16 @@ body, ul, nav, div, header, p {
 .page-padding{
     padding-top: 50px;
 }
+#googleMap{
+    display: block;
+    margin: auto;
+} 
 
- /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-       #map {
+form{
+    .input-error{
+        border: 1px solid red;
+    }
+    .span-error{
         display: block;
-        height: 30vh;
-        width: 50%;
-        margin: auto;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    }
+}

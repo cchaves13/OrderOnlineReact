@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import './ConfirmationScreen.scss';
+import UserForm from './UserForm/UserForm';
+import { createStore, combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import { Provider } from 'react-redux';
+
+
 
 export default class ConfirmationScreen extends Component {
     constructor(props) {
@@ -9,41 +15,34 @@ export default class ConfirmationScreen extends Component {
                  locationIsActive:false
         }
     }
+
+    submit = values => {
+        // print the form values to the console
+        console.log(values)
+      }
+
     toggleLocation = ()=>{
         this.setState({locationIsActive: !this.state.locationIsActive});
     }
-    render() {
-        var mapSytle = {
-            width:"80%",
-            height: "500px",
-        }
+    render() {       
+        const rootReducer = combineReducers({
+            // ...your other reducers here
+            // you have to pass formReducer under 'form' key,
+            // for custom keys look up the docs for 'getFormState'
+            form: formReducer
+          })
+          
+          const store = createStore(rootReducer)
         return (
             <div className="page-padding">
                 <h1>Confirmacion de Pedido</h1>
-                <div className="info-user">
-                    <div className="form-control">
-                        <label>Nombre:</label>
-                        <input src="" className="beauty-input"></input>
-                    </div>
-                    <div className="form-control">
-                        <label>Correo:</label>
-                        <input src="" className="beauty-input"></input>
-                    </div>
-                    <div className="form-control">
-                        <label>Telefono:</label>
-                        <input src="" className="beauty-input"></input>
-                    </div>
-                    <div className="form-control">
-                        <label>Ubicacion:</label>
-                        <input src="" placeholder="Escoge la ubicacion de entrega"
-                            className="beauty-input" disabled></input>
-                        {/* <a className="location-btn" onClick={this.toggleLocation}>
-                            {this.state.locationIsActive ? "Guardar" : "Seleccionar"}
-                        </a> */}
-                    </div>
-                </div>
-                <div id="googleMap" style={mapSytle}
-                 className={this.state.locationIsActive ? "map-active" : "map-hidden"}></div>
+                
+              
+                 <Provider store={store}>
+                    <UserForm onSubmit={this.submit}></UserForm>
+                 </Provider>
+
+                 
             </div>
         )
     }
